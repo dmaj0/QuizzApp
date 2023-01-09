@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Animated, Modal, StatusBar, TextInput} from 'react-native';   
 import { black, white } from 'react-native-paper/lib/typescript/styles/themes/v2/colors';
-import data from '../Src/QuizData';
+import data from '../Src/QuizDataThird';
 import FinalResultScreen from './FinalResultScreen';
 const COLORS = {
   primary: "#252c4a",
@@ -15,7 +15,7 @@ const COLORS = {
   white: "#FFFFFF",
   background: "#252C4A"
 }
-const QuestionScreen = ({ navigation }) => {
+const QuizzScreenThird = ({ navigation }) => {
 
     const allQuestions = data;
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
@@ -106,7 +106,7 @@ const QuestionScreen = ({ navigation }) => {
                   nick: nickname,
                   score: score,
                   total: allQuestions.length,
-                  type: 'General knowledge'
+                  type: 'Science'
               }),
           });
           const json = await response.json();
@@ -273,4 +273,4 @@ const QuestionScreen = ({ navigation }) => {
       },
     };
 
-export default QuestionScreen;
+export default QuizzScreenThird;

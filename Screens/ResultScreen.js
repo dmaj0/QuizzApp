@@ -1,81 +1,64 @@
-import React from 'react';
-import { View, Text } from 'react-native';
-import { DataTable } from 'react-native-paper';
-import { resultsData } from '../Src/ResultsTableData'
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, RefreshControl, View, ActivityIndicator, FlatList, Text, FetchResult } from 'react-native';
 
 
-const ResultsTable = () => {
-    const result = resultsData
-    
+export default Results = () => {
+    const [data, setData] = useState(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch('https://tgryl.pl/quiz/results');
+                const data = await response.json();
+                setData(data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    const columns = [
+        {
+            name: 'Nick',
+            selector: 'nick',
+            sortable: true,
+        },
+        {
+            name: 'Score',
+            selector: 'score',
+            sortable: true,
+        },
+    ];
+
     return (
-        <View>
-          <View style={styles.row}>
-            <Text style={styles.title}>Nick</Text>
-            <Text style={styles.title}>Point</Text>
-            <Text style={styles.title}>Type</Text>
-            <Text style={styles.title}>Date</Text>
-          </View>
-                <View style={styles.row}>
-                  <Text style={styles.cell}>Damian</Text>
-                  <Text style={styles.cell}>1/5</Text>
-                  <Text style={styles.cell}>General</Text>
-                  <Text style={styles.cell}>2022-12-11</Text>
-                </View>
-                <View style={styles.row}>
-                  <Text style={styles.cell}>Majka</Text>
-                  <Text style={styles.cell}>2/5</Text>
-                  <Text style={styles.cell}>General</Text>
-                  <Text style={styles.cell}>2022-12-11</Text>
-                </View>
-                <View style={styles.row}>
-                  <Text style={styles.cell}>Test3</Text>
-                  <Text style={styles.cell}>3/5</Text>
-                  <Text style={styles.cell}>General</Text>
-                  <Text style={styles.cell}>2022-12-11</Text>
-                </View>
-                <View style={styles.row}>
-                  <Text style={styles.cell}>Test</Text>
-                  <Text style={styles.cell}>4/5</Text>
-                  <Text style={styles.cell}>General</Text>
-                  <Text style={styles.cell}>2022-12-13</Text>
-                </View>
-                <View style={styles.row}>
-                  <Text style={styles.cell}>Test5</Text>
-                  <Text style={styles.cell}>4/5</Text>
-                  <Text style={styles.cell}>General</Text>
-                  <Text style={styles.cell}>2022-12-13</Text>
-                </View>
-                <View style={styles.row}>
-                  <Text style={styles.cell}>Test</Text>
-                  <Text style={styles.cell}>4/5</Text>
-                  <Text style={styles.cell}>General</Text>
-                  <Text style={styles.cell}>2022-12-13</Text>
-                </View>
-                <View style={styles.row}>
-                  <Text style={styles.cell}>Test</Text>
-                  <Text style={styles.cell}>4/5</Text>
-                  <Text style={styles.cell}>General</Text>
-                  <Text style={styles.cell}>2022-12-13</Text>
-                </View>
+        <View >
+            <Text style={styles.tableHeader}>NICK, SCORE, TOTAL, TYPE, FINISH</Text>
+            <FlatList
+                data={data}
+                renderItem={({ item }) => (
+                    <View>
+                        <Text style={styles.tableIn}>{item.nick}, {item.score}, {item.total}, {item.type}, {item.createdOn}</Text>
+                    </View>
+                )}
+            keyExtractor={item => item.id }
+            />
         </View>
-        
-      );
-    };
-    
-    const styles = {
-      row: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        paddingVertical: 6,
-        borderBottomWidth: 1,
-        borderBottomColor: '#ccc',
-      },
-      title: {
-        fontWeight: 'bold',
-      },
-      cell: {
-        paddingHorizontal: 8,
-      },
-    };
+    );
+};
 
-export default ResultsTable;
+const styles = StyleSheet.create({
+    container: {
+        padding: 10,
+    },
+    tableHeader: {
+        backgroundColor: '#DCDCDC',
+        fontSize: 15,
+        fontWeight: 'bold'
+        
+    },
+    tableIn: {
+        fontSize: 15,
+    }
+});

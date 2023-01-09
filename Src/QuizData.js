@@ -1,7 +1,7 @@
 export default data = [
     {
         question: "What’s the biggest planet in our solar system?",
-        options: ["Jupiter","Saturn","Neptune","Mercury"],
+        options: ["Jupiter","Saturn","Neptune"],
         correct_option: "Jupiter"
     },
     {
@@ -11,17 +11,17 @@ export default data = [
     },
     {
         question: "What land animal can open its mouth the widest?",
-        options: ["Alligator","Crocodile","Baboon","Hippo"],
+        options: ["Alligator","Baboon","Hippo"],
         correct_option: "Hippo"
     },
     {
         question: "What is the largest animal on Earth?",
-        options: ["The African elephant","The blue whale","The sperm whale","The giant squid"],
+        options: ["The African elephant","The blue whale","The giant squid"],
         correct_option: "The blue whale"
     },
     {
         question: "What is the only flying mammal?",
-        options: ["The bat","The flying squirrel","The bald eagle","The colugo"],
+        options: ["The bat","The flying squirrel","The colugo"],
         correct_option: "The bat"
     }
 ]

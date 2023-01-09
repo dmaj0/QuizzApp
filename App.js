@@ -7,7 +7,11 @@ import { create } from 'react-test-renderer';
 import WelcomeScreen from './Screens/welcomeScreen';
 import ResultsTable from './Screens/ResultScreen';
 import QuestionScreen from './Screens/QuizzScreen';
+import QuizzScreenSecond from './Screens/QuizzScreenSecond';
+import QuizzScreenThird from './Screens/QuizzScreenThird';
+
 import FinalResultScreen from './Screens/FinalResultScreen';
+
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -22,8 +26,8 @@ const App = () => {
         <Drawer.Screen name="Results" component={ResultsTable} />
 
         <Drawer.Screen name="Quizz Ganeral Knowledge" component={QuestionScreen} />
-        <Drawer.Screen name="Quizz Math Knowledge" component={QuestionScreen} />
-        <Drawer.Screen name="Quizz Science Knowledge" component={QuestionScreen} />
+        <Drawer.Screen name="Quizz Math Knowledge" component={QuizzScreenSecond} />
+        <Drawer.Screen name="Quizz Science Knowledge" component={QuizzScreenThird} />
       </Drawer.Navigator> 
     </NavigationContainer>
   );
